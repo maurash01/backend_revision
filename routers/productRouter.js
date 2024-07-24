@@ -1,11 +1,7 @@
-const express = require('express');
-const Model = require('../models/userModel');
-
-
+const express = require('express')
+const Model = require('../models/productModel');
 
 const router = express.Router();
-
-// Reading request
 
 router.post('/add', (req, res) => {
 
@@ -65,14 +61,8 @@ router.get('/getbyid/:id', (req,res) => {
     
 });
 // update
-router.put('/update/:id', (req, res) => {
-    Model.findByIdAndUpdate(req.params.id, req.body, {new : true })
-    .then((result) => {
-        res.status(200).json(result);
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+router.get('/update', (req, res) => {
+    res.send(' update response from user router ');
 });
 
 
@@ -90,16 +80,4 @@ router.delete('/delete/:id', (req, res) => {
     });
 });
 
-router.post('/authenticate',(req,res) => {
-    Model.findOne(req.body)
-    .then((result) => {
-
-        if(result){
-            res.status(200).json(result);
-        }
-        
-    }).catch((err) => {
-        res.status(401).json({message:"Invalid Credentials"})
-    });
-})
 module.exports = router;
